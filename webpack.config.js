@@ -1,39 +1,34 @@
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  entry: { popup: './src/popup.jsx',
-  tab: './src/tab.jsx',
-},
+  entry: { popup: "./src/popup.jsx", convert: "./src/convert.ts" },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: {
-          loader: 'babel-loader',
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
           options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-          }
-      } },
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-      template: './src/popup.html',
-      filename: 'popup.html'
-  },
-  {
-    template: './src/tab.html',
-      filename: 'tab.html'
-  }),
-  new CopyPlugin({
-    patterns: [
-      { from: "public"}
-    ],
-  }),
-],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/popup.html",
+      filename: "popup.html",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "public" }],
+    }),
+  ],
 };

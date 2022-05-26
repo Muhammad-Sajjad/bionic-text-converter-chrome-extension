@@ -1,1 +1,9 @@
-chrome.runtime.onInstalled.addListener((()=>{chrome.storage.local.set({fixation:"1"}),chrome.storage.local.set({saccade:"10"})}));let contextMenuConvertSelection={id:"1",title:"Bionic Reading convert text '%s'",contexts:["selection"]};chrome.contextMenus.create(contextMenuConvertSelection),chrome.contextMenus.onClicked.addListener((async function(e){var t=e.selectionText;chrome.storage.local.set({content:t});let c=await chrome.tabs.create({url:"../src/html/response.html"});chrome.scripting.executeScript({target:{tabId:c.id},files:["./bionic-reading-api.js"]})}));
+let fixation = "1";
+let saccade = "10";
+let apiKey = "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f"
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.local.set({ fixation: "1" });
+  chrome.storage.local.set({ saccade: "10" });
+  chrome.storage.local.set({ apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f" });
+});
