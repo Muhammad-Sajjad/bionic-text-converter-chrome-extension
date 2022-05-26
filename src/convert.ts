@@ -24,9 +24,10 @@ async function main() {
     .then((response) => response.text())
     .then((response) => {
       for (let element of document.getElementsByTagName("html")) {
+        const baseUrl = element.baseURI.split(":",1).toString(); 
         if (
-          element.baseURI !=
-          "chrome-extension://jojbneihpmldhaikgeldboindmklnend/popup.html"
+          baseUrl !=
+          "chrome-extension"
         )
           element.innerHTML = response;
       }
