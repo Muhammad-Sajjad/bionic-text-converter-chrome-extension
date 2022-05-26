@@ -1,0 +1,26 @@
+{
+  "name": "Bionic Text Converter By APIMatic",
+  "description": "An extension that converts the text on the page into bionic text!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "../assets/favicon-32x32.png",
+      "32": "../assets/favicon-32x32.png",
+      "48": "../assets/favicon-32x32.png",
+      "128": "../assets/favicon-32x32.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "contextMenus",
+    "tabs",
+    "pageCapture"
+  ]
+}
