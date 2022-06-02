@@ -16,8 +16,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "bionic-reading-apilib": "/TS_GENERIC_LIB"
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",
