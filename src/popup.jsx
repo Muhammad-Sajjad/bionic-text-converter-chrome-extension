@@ -5,7 +5,15 @@ function Popup() {
   return (
     <div>
       <div>
-        <label htmlFor="apiKey">APIKey: </label>
+        <label htmlFor="apiKey">
+          <a
+            href="https://rapidapi.com/bionic-reading-bionic-reading-default/api/bionic-reading1/"
+            target="_blank"
+          >
+            Bionic-Reading
+          </a>{" "}
+          APIKey:
+        </label>
         <input
           type="text"
           name="apiKey"

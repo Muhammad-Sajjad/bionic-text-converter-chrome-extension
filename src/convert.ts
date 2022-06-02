@@ -24,15 +24,19 @@ async function main() {
     .then((response) => response.text())
     .then((response) => {
       for (let element of document.getElementsByTagName("html")) {
-        const baseUrl = element.baseURI.split(":",1).toString(); 
-        if (
-          baseUrl !=
-          "chrome-extension"
-        )
-          element.innerHTML = response;
+        const baseUrl = element.baseURI.split(":", 1).toString();
+        if (baseUrl != "chrome-extension") element.innerHTML = response;
       }
+      chrome.storage.local.set({
+        apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
+      });
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      chrome.storage.local.set({
+        apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
+      });
+      console.error(err);
+    });
 }
 
 main();
