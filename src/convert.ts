@@ -1,42 +1,42 @@
+import { ApiError, Client, ConvertController } from 'bionic-reading-apilib';
+
 async function main() {
   let api = await chrome.storage.local.get("apiKey");
   let fix = await chrome.storage.local.get("fixation");
   let sac = await chrome.storage.local.get("saccade");
 
-  const encodedParams = new URLSearchParams();
-  encodedParams.append("content", window.location.href);
-  encodedParams.append("response_type", "html");
-  encodedParams.append("request_type", "html");
-  encodedParams.append("fixation", fix.fixation);
-  encodedParams.append("saccade", sac.saccade);
-
-  const options = {
-    method: "POST",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      "X-RapidAPI-Host": "bionic-reading1.p.rapidapi.com",
-      "X-RapidAPI-Key": api.apiKey,
-    },
-    body: encodedParams,
-  };
-
-  fetch("https://bionic-reading1.p.rapidapi.com/convert", options)
-    .then((response) => response.text())
-    .then((response) => {
-      for (let element of document.getElementsByTagName("html")) {
-        const baseUrl = element.baseURI.split(":", 1).toString();
-        if (baseUrl != "chrome-extension") element.innerHTML = response;
-      }
-      chrome.storage.local.set({
-        apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
-      });
-    })
-    .catch((err) => {
-      chrome.storage.local.set({
-        apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
-      });
-      console.error(err);
+  const client = new Client({
+    timeout: 0,
+  })
+  const convertController = new ConvertController(client);
+  const contentType = null;
+  const useQueryString = false;
+  const xRapidapiHost = 'bionic-reading1.p.rapidapi.com';
+  const xRapidapiKey = api.apiKey;
+  const xRapidapiUa = 'RapidAPI-Playground';
+  const content = window.location.href;
+  const responseType = 'html';
+  const requestType = 'html';
+  const fixation = fix.fixation;
+  const saccade = sac.saccade;
+  try {
+    const { result, ...httpResponse } = await convertController.convert(useQueryString, xRapidapiHost, xRapidapiKey, xRapidapiUa, content, responseType, requestType, fixation, saccade);
+    for (let element of document.getElementsByTagName("html")) {
+      const baseUrl = element.baseURI.split(":", 1).toString();
+      if (baseUrl != "chrome-extension") element.innerHTML = result;
+    }
+    chrome.storage.local.set({
+      apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
     });
+  } catch (error) {
+    chrome.storage.local.set({
+      apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
+    });
+    if (error instanceof ApiError) {
+      const errors = error.result;
+      // const { statusCode, headers } = error;
+    }
+  }
 }
 
 main();

@@ -79,7 +79,7 @@ function Popup() {
             active: true,
             currentWindow: true,
           });
-          let a = chrome.scripting.executeScript({
+          chrome.scripting.executeScript({
             target: { tabId: tab.id, allFrames: true },
             files: ["./convert.js"],
           });
