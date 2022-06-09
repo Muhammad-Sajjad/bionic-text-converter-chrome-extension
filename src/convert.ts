@@ -23,7 +23,10 @@ async function main() {
     const { result, ...httpResponse } = await convertController.convert(useQueryString, xRapidapiHost, xRapidapiKey, xRapidapiUa, content, responseType, requestType, fixation, saccade);
     for (let element of document.getElementsByTagName("html")) {
       const baseUrl = element.baseURI.split(":", 1).toString();
-      if (baseUrl != "chrome-extension") element.innerHTML = result;
+      if (baseUrl != "chrome-extension") {
+        element.innerHTML = result;
+        element.setAttribute("style", "font-size: 1.5em; color: #24313E; font-family:Arial, Helvetica, sans-serif; margin: 0 20%;");
+      }
     }
     chrome.storage.local.set({
       apiKey: "5fda81fbc4msh811c827b2f01f9dp18d02cjsn10b0ea83f33f",
