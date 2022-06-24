@@ -1,7 +1,7 @@
 {
   "name": "Bionic Text Converter",
   "description": "An extension that converts the text on the page into bionic text by using Bionic-reading API and it's SDK provided by APIMatic!",
-  "version": "1.0",
+  "version": "2.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "./background.js"
@@ -18,9 +18,6 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting",
-    "contextMenus",
-    "tabs",
-    "pageCapture"
+    "scripting"
   ]
 }
